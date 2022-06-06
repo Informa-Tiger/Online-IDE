@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" style="width:100%; height:100%">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Embedded-Test</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel="preload" href="lib/monaco-editor/dev/vs/editor/editor.main.js" as="script">
+    <link rel="preload" href="lib/monaco-editor/dev/vs/editor/editor.main.nls.de.js" as="script">
+
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/fonts/fonts.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/editor.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/bottomdiv.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/run.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/diagram.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/debugger.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/icons.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/embedded.css'>
+    <script src="lib/p5.js/p5.js"></script>
+    <script src="lib/jquery/jquery-3.3.1.js"></script>
+    <script src="lib/markdownit/markdownit.min.js"></script>
+    <script src="lib/monaco-editor/dev/vs/loader.js"></script>
+    <script src="js/runtimelibrary/graphics/SpriteLibrary.js"></script>
+    <script src="lib/howler/howler.core.min.js"></script>
+    <script src="js/main/gui/diagrams/classdiagram/Router.js"></script>
+    <script src="lib/pixijs/pixi.js"></script>
+    <script src="lib/pixi3d/pixi3d.js"></script>
+
+    <script type="module" src="js/embedded/EmbeddedStarter.js"></script>
+
+    <!-- to use packed version just alter last line to:-->
+    <!-- <script src="js.webpack/main.js"></script> -->
+
+    <style type="text/css">
+        html {
+            text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -o-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        div.java-online {
+            display: flex;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 600px;
+            height: 400px;
+            margin: 0px;
+            padding: 0px;
+            border: none;
+        }
+
+    </style>
+
+    <script>
+        function onload() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var body = document.getElementsByTagName("body")[0];
+            var scripts = urlParams.getAll("s").concat(urlParams.getAll("script"));
+            if (scripts.length == 0) scripts = [""]
+            for (script of scripts) {
+                var scriptTag = document.createElement("script");
+                scriptTag.type = "text/plain";
+                if (script != "") {
+                    scriptTag.src = script;
+                    scriptTag.title = script.substring(script.indexOf("/") + 1);
+                } else {
+                    scriptTag.title = "empty_workspace.java";
+                }
+                body.appendChild(scriptTag);
+            }
+        }
+    </script>
+
+</head>
+
+<body onload="onload()">
+    <div class="java-online" data-java-online="{
+      'id':'predefined_Workspace',
+      'withBottomPanel':true, 
+      'withFileList':true,
+      'withPCode':true,
+      'withConsole':true,
+      'withErrorList':true,
+      'speed':'max'
+    }">
+    </div>
+</body>
+
+</html>
