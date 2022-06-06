@@ -28,8 +28,6 @@
     <script src="lib/pixijs/pixi.js"></script>
     <script src="lib/pixi3d/pixi3d.js"></script>
 
-    <script type="module" src="js/embedded/EmbeddedStarter.js"></script>
-
     <!-- to use packed version just alter last line to:-->
     <!-- <script src="js.webpack/main.js"></script> -->
 
@@ -66,6 +64,7 @@
         function onload() {
             var urlParams = new URLSearchParams(window.location.search);
             var body = document.getElementsByTagName("body")[0];
+            var head = document.getElementsByTagName("head")[0];
             var scripts = urlParams.getAll("s").concat(urlParams.getAll("script"));
             if (scripts.length == 0) scripts = [""]
             for (script of scripts) {
@@ -79,6 +78,7 @@
                 }
                 body.appendChild(scriptTag);
             }
+            head.innerHTML += "<script type='module' src='js/embedded/EmbeddedStarter.js'></script>";
         }
     </script>
 
