@@ -88,6 +88,20 @@ body .monaco-editor-hover .monaco-tokenized-source {
     color: var(--renameInput-color) !important;
 }
 
+.isidigitaldiv {
+    z-index: 2000;
+}
+
+.isidigitalimg:hover {
+    transform: scale(1.03);
+}
+
+.isidigitalimg {
+    position: absolute;
+    right:  3%;
+    top: 3%;
+    width: 25vw;
+}
 
 .jo_parenthesis_warning {
     visibility: hidden;
@@ -3354,6 +3368,7 @@ div.jo_synchro_activeLine.jo_synchro_hoverLine {
     flex: 1;
     display: flex;
     flex-direction: row;
+    height: calc(100% - 150px);
 }
 
 #checkoutRepo-divBelow {
