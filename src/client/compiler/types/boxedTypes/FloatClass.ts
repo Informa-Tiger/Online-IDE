@@ -22,10 +22,6 @@ export class FloatClass extends UnboxableKlass {
 
     }
 
-    canCastTo(type: Type): boolean {
-        return this.unboxableAs.indexOf(type) >= 0 || super.canCastTo(type);
-    }
-
     init() {
 
         this.unboxableAs = [floatPrimitiveType, doublePrimitiveType];
@@ -106,7 +102,7 @@ export class FloatClass extends UnboxableKlass {
             { identifier: "f", type: floatPrimitiveType, declaration: null, usagePositions: null, isFinal: true }
         ]), stringPrimitiveType,
             (parameters) => {
-                return "" + parameters[1].value;
+                return floatToString(parameters[1].value);
             }, false, true, "Gibt die übergebene Zahl als String-Wert zurück."));
 
         this.addMethod(new Method("valueOf", new Parameterlist([
