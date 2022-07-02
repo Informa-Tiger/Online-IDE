@@ -523,6 +523,18 @@ export class MainEmbedded implements MainBase {
                 callback: () => {
                     // nothing to do.
                 }
+            }, {
+                caption: "Zum Original-Repo",
+                link: "https://github.com/martin-pabst/Online-IDE",
+                callback: () => {
+                    // nothing to do.
+                }
+            }, {
+                caption: "Zum Fork von @Informa-Tiger",
+                link: "https://github.com/Informa-Tiger/Online-IDE",
+                callback: () => {
+                    // nothing to do.
+                }
             }], ev.pageX + 2, ev.pageY + 2);
         });
 
