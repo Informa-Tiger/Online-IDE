@@ -6,6 +6,7 @@ import { PrintManager } from "../main/gui/PrintManager.js";
 import { RuntimeObject } from "../interpreter/RuntimeObject.js";
 import { EnumRuntimeObject } from "../compiler/types/Enum.js";
 import { SoundTools } from "../tools/SoundTools.js";
+import { Main } from "../main/Main.js";
 
 export class SystemToolsClass extends Klass {
 
@@ -24,7 +25,7 @@ export class SystemToolsClass extends Klass {
             }, false, true, "Löscht den Bildschirm"));
 
         this.addMethod(new Method("setSpeed", new Parameterlist([
-            {identifier: "speed", type: intPrimitiveType, declaration: null, usagePositions: null, isFinal: true }
+            { identifier: "speed", type: intPrimitiveType, declaration: null, usagePositions: null, isFinal: true }
         ]), null,
             (parameters) => {
                 let speed: number = parameters[1].value;
@@ -40,7 +41,7 @@ export class SystemToolsClass extends Klass {
             }, false, true, "Gibt die Ausführungsgeschwindigkeit in Steps pro Sekunde zurück."));
 
         this.addMethod(new Method("pause", new Parameterlist([
-            {identifier: "durationInMs", type: intPrimitiveType, declaration: null, usagePositions: null, isFinal: true }
+            { identifier: "durationInMs", type: intPrimitiveType, declaration: null, usagePositions: null, isFinal: true }
         ]), null,
             (parameters) => {
 
@@ -83,6 +84,29 @@ export class SystemToolsClass extends Klass {
             }
             , false, true, "Fügt einen KeyListener hinzu, dessen Methode keyTyped immer dann aufgerufen wird, wenn eine Taste gedrückt und anschließend losgelassen wird."));
 
+        this.addMethod(new Method("getUserName", new Parameterlist([
+        ]), stringPrimitiveType,
+            (parameters) => {
+                if (module.main.isEmbedded()) return null;
+                return (<Main>module.main).user.username;
+
+            }, false, true, "Gibt den Namen des angemeldeten Users zurück (In der Embedded-IDE wird null zurückgegeben)"));
+
+        this.addMethod(new Method("getUserFirstName", new Parameterlist([
+        ]), stringPrimitiveType,
+            (parameters) => {
+                if (module.main.isEmbedded()) return null;
+                return (<Main>module.main).user.rufname;
+
+            }, false, true, "Gibt den Vornamen des angemeldeten Users zurück (In der Embedded-IDE wird null zurückgegeben)"));
+
+        this.addMethod(new Method("getUserLastName", new Parameterlist([
+        ]), stringPrimitiveType,
+            (parameters) => {
+                if (module.main.isEmbedded()) return null;
+                return (<Main>module.main).user.familienname;
+
+            }, false, true, "Gibt den Nachnamen des angemeldeten Users zurück (In der Embedded-IDE wird null zurückgegeben)"));
         // this.addMethod(new Method("playSound", new Parameterlist([
         //     { identifier: "sound", type: stringPrimitiveType, declaration: null, usagePositions: null, isFinal: true }
         // ]), null,
